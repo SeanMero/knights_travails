@@ -8,24 +8,18 @@ class Knight < Board
     @position = position
   end
 
-  def valid_move?(from, to) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
-    if (to[0] == from[0] + 1 && to[1] == from[1] + 2) ||
-       (to[0] == from[0] + 2 && to[1] == from[1] + 1) ||
-       (to[0] == from[0] + 2 && to[1] == from[1] - 1) ||
-       (to[0] == from[0] + 1 && to[1] == from[1] - 2) ||
-       (to[0] == from[0] - 1 && to[1] == from[1] - 2) ||
-       (to[0] == from[0] - 2 && to[1] == from[1] - 1) ||
-       (to[0] == from[0] - 2 && to[1] == from[1] + 1) ||
-       (to[0] == from[0] - 1 && to[1] == from[1] + 2)
-      true
-    end
-  end
-
-  def on_board?(to)
-    true if (0..(size - 1)).include?(to[0]) && (0..(size - 1)).include?(to[1])
-  end
-
   def move(to, from = position)
     @position = to if valid_move?(from, to) && on_board?(to)
   end
+end
+
+def knight_moves(from, to)
+  # build it like a binary search tree, where each move is a node and each possible move from there is a subtree
+  # do breadth search to find success branch with smallest height
+
+  # build graph of possible moves from 'from', then possible moves from those moves
+  # for how many steps though?
+  start = Node.new(from)
+  start.auto_move
+
 end
